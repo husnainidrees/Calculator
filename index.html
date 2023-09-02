@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+</head>
+
+<style>
+    body
+    {
+     
+        background-color: darkslategray;
+    }
+    table
+    {   
+        margin-top: 250px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    input
+    {
+        width: 300px;
+        height: 30px;
+        text-align: right;
+    }
+ 
+    button
+    {
+        max-width: 50px;
+        min-width: 50px;
+        max-height: 30px;
+        min-height: 30px;
+        margin: 3px;
+    }
+    button
+    {
+        background-color: lavender;
+    }
+    .numbers
+    {
+        background-color: white;
+    }
+    #e
+    {
+        background-color: #005a9e;
+    }
+</style>
+
+<script>
+    var operator;
+    var num1, num2, res;
+    var element;
+    function number(temp)
+    {
+        element = document.getElementById("result");
+        if(temp=='x')
+        {
+            operator = '*';
+            num1 = element.value;
+            element.value = '';
+        }
+        else if(temp=='+')
+        {
+            operator = '+';
+            num1 = element.value;
+            element.value = '';
+        }
+        else if(temp=='-')
+        {
+            operator = '-';
+            num1 = element.value;
+            element.value = '';
+        }
+        else if(temp=='/')
+        {
+            operator = '/';
+            num1 = element.value;
+            element.value = '';
+        }
+        else if(temp=='%')
+        {
+            operator = '%';
+            num1 = element.value;
+            element.value = '';
+        }
+        else if(temp=='^')
+        {
+            operator = '^';
+            num1 = element.value;
+            element.value = '';
+        }
+        else
+        {
+            var num = element.value + temp;
+            element.value = num;
+        }        
+        
+    }
+
+    function calculate()
+    {
+        num2 = element.value;
+        if(operator=='*')
+        {
+            res = eval(eval(num1)*eval(num2));
+        }
+        else if(operator=='+')
+        {
+            res = eval(eval(num1)+eval(num2));
+        }
+        else if(operator=='-')
+        {
+            res = eval(eval(num1)-eval(num2));
+        }
+        else if(operator=='/')
+        {
+            res = eval(eval(num1)/eval(num2));
+        }
+        else if(operator=='%')
+        {
+            res = eval(eval(num1)%eval(num2));
+        }
+        else if(operator=='^')
+        {
+            var x = eval(num1);
+            var y = eval(num2);
+            if(x != 0)
+            {
+                res = 1;
+
+                for(var i = 0; i < y; i++)
+                {
+                    res = res * x;
+                }
+            }
+            else{
+                res = 0;
+            }
+        }
+
+        element.value = res;
+    }
+
+    function invertSign()
+    {
+       element.value = eval(element.value)*(-1);
+    }
+    function positive()
+    {
+        if(element.value < 0)
+        {
+            element.value = eval(element.value)*(-1);
+        }
+    }
+    function C()
+    {
+        num1 = num2 = 0;
+        element.value = 0;
+    }
+    function fact()
+    {
+        var f = 1, i = 0;
+        for(i = 1; i <= element.value; i++)
+        {
+            f = f * i;
+        }
+        element.value = f;
+    }
+    function inverse()
+    {
+        element.value = 1 / element.value;
+    }
+    function ex()
+    {
+        var e = 2.7182818284590452353602874713527;
+        var x = 1;
+        for(var i = 0; i < element.value; i++)
+        {
+            x = e * x; 
+        }
+        element.value = x;
+    }
+    function tenPower()
+    {
+        var x = 1;
+        if(element.value != 0)
+        {
+            for(var i = 0; i < element.value; i++)
+            {
+                x = 10 * x; 
+            }
+            element.value = x;
+        }
+    }
+    function twoPower()
+    {
+        var x = 1;
+        if(element.value != 0)
+        {
+            for(var i = 0; i < element.value; i++)
+            {
+                x = 2 * x; 
+            }
+            element.value = x;
+        }
+    }
+    function powertwo()
+    {
+        element.value = element.value * element.value; 
+    }
+    function powerthree()
+    {
+        element.value = element.value * element.value * element.value; 
+    }
+    function squareRoot()
+    {
+        element.value = Math.sqrt(element.value);
+    }
+    function cubeRoot()
+    {
+        element.value = Math. cbrt(element.value);
+    }
+    function log()
+    {
+        element.value = Math.log10(element.value);
+    }
+    function ln()
+    {
+        element.value = Math.log(element.value);
+    }
+    function backspace()
+    {
+        let x = element.value;
+        const y = x.toString().split('').slice(0, -1).join('');
+        element.value = Number(y);
+    }
+</script>
+
+<body>
+
+    <table>
+
+    <tr>
+        <td colspan="5">
+    <input type="number" name="result" id="result" readonly>
+        </td>
+    </tr>
+
+    <tr>
+        <td><button onclick="powerthree()">x^3</button></td>
+        <td><button onclick='number("3.1415926535897932384626433832795")'>&#960</button></td>
+        <td><button onclick='number("2.7182818284590452353602874713527")'>e</button></td>
+        <td><button onclick="C()">C</button></td>
+        <td><button onclick="backspace()">&#8592</button></td>
+    </tr>
+    
+    <tr>
+        <td><button onclick="powertwo()">x^2</button></td>
+        <td><button onclick="inverse()">1/x</button></td>
+        <td><button onclick="positive()">|x|</button></td>
+        <td><button onclick="ex()">e^x</button></td>
+        <td><button onclick='number("%")'>mod</button></td>
+    </tr>
+
+    <tr>
+        <td><button onclick="twoPower()">2^x</button></td>
+        <td><button onclick="squareRoot()">2&#8730</button></td>
+        <td><button onclick="cubeRoot()">3&#8730</button></td>
+        <td><button onclick="fact()">n!</button></td>
+        <td><button onclick='number("/")'>/</button></td>
+    </tr>
+
+    <tr>
+    <td><button onclick='number("^")'>x^y</button></td>
+    <td><button class="numbers" onclick='number("7")'>7</button></td>
+    <td><button class="numbers" onclick='number("8")'>8</button></td>
+    <td><button class="numbers" onclick='number("9")'>9</button></td>
+    <td><button onclick='number("x")'>x</button></td>
+    </tr>
+
+    <tr>
+    <td><button onclick="tenPower()">10^x</button></td>
+    <td><button class="numbers" onclick='number("4")'>4</button></td>
+    <td><button class="numbers" onclick='number("5")'>5</button></td>
+    <td><button class="numbers" onclick='number("6")'>6</button></td>
+    <td><button onclick='number("-")'>-</button></td>
+    </tr>
+
+    <tr>
+    <td><button onclick="log()">log</button></td>
+    <td><button class="numbers" onclick='number("1")'>1</button></td>
+    <td><button class="numbers" onclick='number("2")'>2</button></td>
+    <td><button class="numbers" onclick='number("3")'>3</button></td>
+    <td><button onclick='number("+")'>+</button></td>
+    </tr>
+
+    <tr>   
+    <td><button onclick="ln()">ln</button></td>
+    <td><button onclick="invertSign()">+/-</button></td>
+    <td><button class="numbers" onclick='number("0")'>0</button></td>
+    <td><button onclick='number(".")'>.</button></td>
+    <td><button id="e" onclick="calculate()">=</button></td>
+    </tr>
+    
+    </table>
+</body>
+</html>
